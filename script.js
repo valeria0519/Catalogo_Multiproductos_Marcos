@@ -1,17 +1,6 @@
-// ╔══════════════════════════════════════════════════════════════════╗
-// ║                     ⚙ CONFIGURACIÓN                            ║
-// ╠══════════════════════════════════════════════════════════════════╣
-// ║  1. Publicá tu Google Sheet como CSV:                           ║
-// ║     Archivo → Compartir → Publicar en la web                   ║
-// ║     Hoja "Productos" → CSV → Publicar → Copiar URL             ║
-// ║  2. Pegá esa URL en SHEET_URL                                   ║
-// ║  3. Actualizá el número de WhatsApp                             ║
-// ╚══════════════════════════════════════════════════════════════════╝
-
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQaN4SzgBoastQeqeDW84pYlTXrflYS0E56K21nOoV7TcypyafwF5QXvq6xLZsqrVq_zgA8YOUF8ICO/pub?gid=0&single=true&output=csv";
-const WA_NUM    = "5491144751539";   // Sin +, sin espacios
+const WA_NUM    = "5491144751539";
 
-// ── CATEGORÍAS — emoji automático ──────────────────────────────────
 const CAT_MAP = {
   "celular":           { emoji:"📱", label:"Celulares" },
   "celulares":         { emoji:"📱", label:"Celulares" },
@@ -47,7 +36,6 @@ function catCfg(raw) {
   return CAT_MAP[k] || { emoji:"🛍️", label: raw || "Otros" };
 }
 
-// ── HELPERS ─────────────────────────────────────────────────────────
 const WA_PATH = `<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>`;
 const WA_SVG = `<svg viewBox="0 0 24 24" fill="currentColor">${WA_PATH}</svg>`;
 
@@ -58,7 +46,6 @@ function fmt(val) {
   return "$" + parseInt(n).toLocaleString("es-AR");
 }
 
-// Mensaje WhatsApp con nombre y precio — exactamente como pediste
 function waMsg(p) {
   const precio = p.precio_cuota
     ? `${fmt(p.precio_cuota)} en ${p.cuotas || "?"} cuotas`
@@ -67,12 +54,10 @@ function waMsg(p) {
 }
 function waUrl(p) { return `https://wa.me/${WA_NUM}?text=${waMsg(p)}`; }
 
-// ── PARSEAR CSV ──────────────────────────────────────────────────────
 function parseCSV(txt) {
   const lines = txt.trim().split("\n");
   if (lines.length < 2) return [];
 
-  // Parsear línea respetando comillas
   function splitLine(line) {
     const vals = []; let cur = "", inQ = false;
     for (let i = 0; i < line.length; i++) {
@@ -85,16 +70,12 @@ function parseCSV(txt) {
     return vals.map(v => v.trim().replace(/^"|"$/g, ""));
   }
 
-  // Headers — mapear exactamente a las columnas de tu Sheet
   const hdrs = splitLine(lines[0]).map(h => h.toLowerCase().trim());
   const idx = {};
-  // Columnas de TU sheet:
-  // id | producto | categoria | descripcion | precio_contado | precio_cuotas | cuotas | imagen | stock | etiqueta | destacado | orden
   const COLS = ["id","producto","categoria","descripcion","precio_contado","precio_cuotas","cuotas","imagen","stock","etiqueta","destacado","orden"];
   COLS.forEach(c => {
     const i = hdrs.indexOf(c);
     if (i !== -1) idx[c] = i;
-    // aliases
     if (c === "precio_cuotas" && i === -1) { const j = hdrs.indexOf("precio_cuota"); if(j!==-1) idx[c]=j; }
     if (c === "producto" && i === -1) { const j = hdrs.indexOf("nombre"); if(j!==-1) idx[c]=j; }
   });
@@ -111,7 +92,7 @@ function parseCSV(txt) {
       categoria:      get(v,"categoria"),
       descripcion:    get(v,"descripcion"),
       precio_contado: get(v,"precio_contado"),
-      precio_cuota:   get(v,"precio_cuotas"),   // normalizado a precio_cuota internamente
+      precio_cuota:   get(v,"precio_cuotas"),
       cuotas:         get(v,"cuotas"),
       imagen:         get(v,"imagen"),
       stock:          get(v,"stock") || "disponible",
@@ -122,7 +103,6 @@ function parseCSV(txt) {
   }).filter(Boolean).sort((a,b) => a.orden - b.orden);
 }
 
-// ── CARD HTML ────────────────────────────────────────────────────────
 function cardHTML(p) {
   const cfg      = catCfg(p.categoria);
   const dispon   = !["sin stock","agotado","no"].includes(p.stock.toLowerCase());
@@ -130,18 +110,15 @@ function cardHTML(p) {
   const cuota    = fmt(p.precio_cuota);
   const contado  = fmt(p.precio_contado);
 
-  // Tags
   const tags = [];
   if (esDestad) tags.push(`<span class="tag tag-dest">⭐ Destacado</span>`);
   if (p.etiqueta) tags.push(`<span class="tag tag-custom">${p.etiqueta}</span>`);
   if (!dispon)    tags.push(`<span class="tag tag-sin">Sin stock</span>`);
 
-  // Imagen
   const imgInner = p.imagen && p.imagen.startsWith("http")
     ? `<img src="${p.imagen}" alt="${p.producto}" loading="lazy" onerror="this.style.display='none'">`
     : cfg.emoji;
 
-  // Precio
   let precioHTML;
   if (cuota) {
     precioHTML = `
@@ -177,12 +154,10 @@ function cardHTML(p) {
   </div>`;
 }
 
-// ── ESTADO GLOBAL ────────────────────────────────────────────────────
 let PRODS     = [];
 let catActiva = "todos";
 let paginaAnterior = "home";
 
-// ── RENDER ──────────────────────────────────────────────────────────
 function renderGrid(id, lista) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -194,7 +169,6 @@ function skeletons(id, n=6) {
   if (el) el.innerHTML = Array(n).fill(`<div class="skel"></div>`).join("");
 }
 
-// ── CATEGORÍAS ───────────────────────────────────────────────────────
 function getCats(prods) {
   const m = {};
   prods.forEach(p => {
@@ -231,7 +205,6 @@ function buildSidebarCats(cats) {
     }).join("")}`;
 }
 
-// ── FILTROS CATÁLOGO ─────────────────────────────────────────────────
 function setCategoria(cat, btn) {
   catActiva = cat;
   document.querySelectorAll(".fcat-btn").forEach(b=>b.classList.remove("active"));
@@ -273,7 +246,6 @@ function limpiarFiltros() {
   aplicarFiltros();
 }
 
-// ── DETALLE ──────────────────────────────────────────────────────────
 function verDetalle(id) {
   const p = PRODS.find(x=>x.id===id);
   if (!p) return;
@@ -323,7 +295,6 @@ function verDetalle(id) {
   irPagina("detalle");
 }
 
-// ── BÚSQUEDA ─────────────────────────────────────────────────────────
 let searchDelay;
 document.getElementById("search-input").addEventListener("input", function() {
   const q = this.value.trim();
@@ -357,7 +328,6 @@ function limpiarBusqueda() {
   navHome();
 }
 
-// ── NAVEGACIÓN ────────────────────────────────────────────────────────
 function irPagina(nombre) {
   document.querySelectorAll(".pg").forEach(p=>p.classList.remove("active"));
   document.getElementById(`pg-${nombre}`)?.classList.add("active");
@@ -395,7 +365,6 @@ function cerrarSidebar() {
   document.getElementById("sidebar-overlay")?.classList.remove("show");
 }
 
-// ── CARGAR DATOS ─────────────────────────────────────────────────────
 async function cargar() {
   skeletons("grid-destacados", 4);
   skeletons("grid-todos", 6);
@@ -407,8 +376,15 @@ async function cargar() {
     if (!PRODS.length) throw new Error("Sheet vacía");
     renderTodo();
   } catch(e) {
-    console.warn("No se pudo cargar la Sheet, usando demo:", e.message);
-    usarDemo();
+    // Mostrar error en pantalla en lugar de demo
+    ["grid-destacados","grid-todos","grid-catalogo"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = `<p style="color:#e53935;padding:20px;text-align:center">
+        ⚠️ No se pudieron cargar los productos.<br>
+        <small>${e.message}</small>
+      </p>`;
+    });
+    console.error("Error cargando Sheet:", e);
   }
 }
 
@@ -416,34 +392,10 @@ function renderTodo() {
   const cats = getCats(PRODS);
   const dest = PRODS.filter(p=>["sí","si","1","true"].includes((p.destacado||"").toLowerCase()));
 
-  // Home
   renderGrid("grid-destacados", dest.length ? dest : PRODS.slice(0,6));
   buildCatsHome(cats);
-
-  // Catálogo
   buildSidebarCats(cats);
   aplicarFiltros();
 }
 
-// ── DEMO DATA ─────────────────────────────────────────────────────────
-// Se usa mientras no haya Sheet conectada
-function usarDemo() {
-  PRODS = [
-    {id:"1", producto:"Termotanque Sirena 40L",        categoria:"Hogar",       descripcion:"40L · Eléctrico · 1500W/1900W · Ideal monoambiente",       precio_contado:"275900", precio_cuota:"40000", cuotas:"8",  imagen:"", stock:"disponible", etiqueta:"Reingreso", destacado:"sí", orden:1},
-    {id:"2", producto:"Moto G06 Power 256GB",           categoria:"Celular",     descripcion:"256GB · Batería 5000mAh · Cámara 50MP",                    precio_contado:"330000", precio_cuota:"47000", cuotas:"8",  imagen:"", stock:"disponible", etiqueta:"",          destacado:"sí", orden:2},
-    {id:"3", producto:"Perfume Phantom Paco Rabanne",   categoria:"Perfumería",  descripcion:"50ml · Original con caja · Envío incluido",                precio_contado:"205000", precio_cuota:"31000", cuotas:"8",  imagen:"", stock:"disponible", etiqueta:"",          destacado:"sí", orden:3},
-    {id:"4", producto:"Base + Colchón Gala 140x190",    categoria:"Sommier",     descripcion:"Colchón Gala · Base · 140x190 · Mejor descanso",           precio_contado:"412000", precio_cuota:"",      cuotas:"",   imagen:"", stock:"disponible", etiqueta:"",          destacado:"sí", orden:4},
-    {id:"5", producto:"Silla Gamer Alpina FT-088",      categoria:"Sillas Gamer",descripcion:"Ergonómica · Giratoria · Reclinable",                     precio_contado:"188000", precio_cuota:"29000", cuotas:"8",  imagen:"", stock:"disponible", etiqueta:"",          destacado:"sí", orden:5},
-    {id:"6", producto:"Cortadora de Fiambre Ultracorte",categoria:"Hogar",       descripcion:"Cortes perfectos · Uso doméstico · Fácil limpieza",        precio_contado:"190000", precio_cuota:"29000", cuotas:"8",  imagen:"", stock:"disponible", etiqueta:"Oferta",    destacado:"",  orden:6},
-    {id:"7", producto:"Smart TV 43\" LG Full HD",       categoria:"TV",          descripcion:"43\" · Full HD · WebOS · 3 HDMI",                         precio_contado:"480000", precio_cuota:"60000", cuotas:"12", imagen:"", stock:"disponible", etiqueta:"",          destacado:"",  orden:7},
-    {id:"8", producto:"Heladera Drean 360L No Frost",   categoria:"Hogar",       descripcion:"No Frost · 360L · Freezer superior",                      precio_contado:"890000", precio_cuota:"89000", cuotas:"12", imagen:"", stock:"sin stock",  etiqueta:"",          destacado:"",  orden:8},
-    {id:"9", producto:"Samsung Galaxy A15 128GB",       categoria:"Celular",     descripcion:"128GB · 6GB RAM · Android 14 · 6.5\"",                     precio_contado:"320000", precio_cuota:"44000", cuotas:"9",  imagen:"", stock:"disponible", etiqueta:"Nuevo",     destacado:"",  orden:9},
-    {id:"10",producto:"Aire Split 3000 Frío/Calor",     categoria:"Aire",        descripcion:"3000 frigorías · Frío y calor · Bajo consumo",             precio_contado:"650000", precio_cuota:"75000", cuotas:"12", imagen:"", stock:"disponible", etiqueta:"",          destacado:"",  orden:10},
-    {id:"11",producto:"Bicicleta Rodado 29 Mountain",   categoria:"Bicicleta",   descripcion:"21 velocidades · Frenos disco · Cuadro acero",             precio_contado:"310000", precio_cuota:"45000", cuotas:"9",  imagen:"", stock:"disponible", etiqueta:"",          destacado:"",  orden:11},
-    {id:"12",producto:"Waflera Oster Profesional",      categoria:"Hogar",       descripcion:"Antiadherente · Placas removibles · 1000W",                precio_contado:"95000",  precio_cuota:"15000", cuotas:"8",  imagen:"", stock:"disponible", etiqueta:"Oferta",    destacado:"",  orden:12},
-  ];
-  renderTodo();
-}
-
-// ── ARRANCAR ──────────────────────────────────────────────────────────
 cargar();
