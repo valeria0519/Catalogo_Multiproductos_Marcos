@@ -371,32 +371,44 @@ input{font-family:inherit}
   position:fixed;bottom:0;left:0;right:0;z-index:300;
   background:rgba(255,255,255,.97);backdrop-filter:blur(16px);
   border-top:1px solid var(--gris-border);
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  align-items:center;
-  height:62px;
-  padding-bottom:env(safe-area-inset-bottom);
+  display:flex;align-items:center;justify-content:space-around;
+  padding:7px 0 10px;
   box-shadow:0 -4px 20px rgba(0,0,0,.08);
 }
 .bn-btn{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
   font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
   color:var(--gris2);background:none;border:none;cursor:pointer;
-  height:100%;width:100%;
-  border-radius:0;transition:color .2s;
+  padding:4px 22px;border-radius:10px;transition:color .2s;
 }
 .bn-btn svg{width:20px;height:20px}
 .bn-btn.active,.bn-btn:hover{color:var(--nrj)}
-.bn-wa{
-  background:var(--verde) !important;
-  color:#fff !important;
-  border-radius:0 !important;
-  padding:0 !important;
-  height:100% !important;
-  width:100% !important;
+.bn-wa{background:var(--verde)!important;color:#fff!important;border-radius:50px!important;padding:6px 18px!important}
+.bn-wa svg{fill:#fff;stroke:none}
+.bn-wa:hover{opacity:.9;color:#fff!important}
+
+@media(max-width:560px){
+  .bnav{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    align-items:stretch;
+    padding:0;
+    height:58px;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .bn-btn{
+    padding:0;
+    height:100%;
+    border-radius:0;
+    justify-content:center;
+  }
+  .bn-wa{
+    border-radius:0 !important;
+    padding:0 !important;
+    height:100% !important;
+    width:100% !important;
+  }
 }
-.bn-wa svg{fill:#fff;stroke:none;width:22px;height:22px}
-.bn-wa:hover{opacity:.9;color:#fff !important}
 
 .s-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,.45)}
 .s-overlay.show{display:block}
