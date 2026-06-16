@@ -28,78 +28,133 @@
   </div>
 </header>
 
-<!-- APP -->
 <main id="app">
 
   <!-- ── HOME ── -->
   <section id="pg-home" class="pg active">
 
+    <!-- HERO compacto -->
     <div class="hero">
       <div class="hero-glow"></div>
       <div class="hero-body">
-        <span class="hero-pill">✦ LA ÚNICA TIENDA ONLINE QUE TE DA ESA FACILIDAD</span>
-        <h1>TODO lo que<br>necesitás,<br><em>EN 8 CUOTAS FIJAS SEMANALES</em></h1>
-
-        <p>Celulares · TV · Hogar · Perfumería · Sommier · Gamer</p>
-        <div class="hero-btns">
-          <button class="btn-grad" onclick="navCatalogo()">Ver catálogo</button>
+        <span class="hero-pill reveal-up" style="--d:0ms">✦ 8 CUOTAS FIJAS SEMANALES · SIN INTERÉS</span>
+        <h1 class="reveal-up" style="--d:120ms">TODO lo que<br>necesitás,<br><em>a tu alcance</em></h1>
+        <p class="reveal-up" style="--d:240ms">Celulares · Hogar · Perfumería · Electro · Sommier · Gamer</p>
+        <div class="hero-btns reveal-up" style="--d:360ms">
+          <button class="btn-grad" onclick="document.getElementById('sec-cats').scrollIntoView({behavior:'smooth'})">
+            Ver categorías ↓
+          </button>
           <a href="https://wa.me/5491144751539?text=Hola!%20Quiero%20consultar%20sobre%20un%20producto." target="_blank" class="btn-wa-outline">
             <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Consultá ahora
           </a>
         </div>
       </div>
+      <div class="hero-scroll-hint reveal-up" style="--d:600ms">
+        <span>Explorá</span>
+        <div class="scroll-line"></div>
+      </div>
     </div>
 
-    <!-- DESTACADOS -->
-    <div class="sec">
+    <!-- CATEGORÍAS — PRIMERO Y PRINCIPAL -->
+    <div class="sec sec-cats" id="sec-cats">
       <div class="sec-inner">
-        <div class="sec-head">
-          <h2 class="sec-title">⭐ Destacados</h2>
+        <div class="sec-head reveal-up">
+          <div>
+            <p class="sec-eyebrow">Navegá por sección</p>
+            <h2 class="sec-title">¿Qué estás buscando?</h2>
+          </div>
+        </div>
+        <div class="cats-grid" id="cats-home"></div>
+      </div>
+    </div>
+
+    <!-- PRODUCTOS DESTACADOS -->
+    <div class="sec sec-dark">
+      <div class="sec-inner">
+        <div class="sec-head reveal-up">
+          <div>
+            <p class="sec-eyebrow">Selección especial</p>
+            <h2 class="sec-title">⭐ Destacados</h2>
+          </div>
           <button class="ver-todos-btn" onclick="navCatalogo()">Ver todos →</button>
         </div>
         <div class="grid" id="grid-destacados"></div>
       </div>
     </div>
 
-    <!-- CATEGORÍAS -->
-    <div class="sec sec-dark">
+    <!-- BENEFICIOS -->
+    <div class="sec sec-benefits">
       <div class="sec-inner">
-        <h2 class="sec-title">Explorá por categoría</h2>
-        <div class="cats-row" id="cats-home"></div>
+        <div class="benefits-row">
+          <div class="benefit-item reveal-up" style="--d:0ms">
+            <span class="benefit-icon">📦</span>
+            <div>
+              <strong>Envío a todo el país</strong>
+              <span>Hacemos llegar tu pedido donde estés</span>
+            </div>
+          </div>
+          <div class="benefit-item reveal-up" style="--d:100ms">
+            <span class="benefit-icon">💳</span>
+            <div>
+              <strong>8 cuotas fijas semanales</strong>
+              <span>Sin interés oculto</span>
+            </div>
+          </div>
+          <div class="benefit-item reveal-up" style="--d:200ms">
+            <span class="benefit-icon">✅</span>
+            <div>
+              <strong>Garantía en todos los productos</strong>
+              <span>Respaldamos cada venta</span>
+            </div>
+          </div>
+          <div class="benefit-item reveal-up" style="--d:300ms">
+            <span class="benefit-icon">💬</span>
+            <div>
+              <strong>Atención por WhatsApp</strong>
+              <span>Respondemos al instante</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA FINAL -->
+    <div class="sec sec-cta">
+      <div class="sec-inner">
+        <div class="cta-box reveal-up">
+          <h2>¿No encontrás lo que buscás?</h2>
+          <p>Escribinos y te conseguimos el producto que necesitás.</p>
+          <a href="https://wa.me/5491144751539?text=Hola!%20Busco%20un%20producto%20que%20no%20veo%20en%20el%20catalogo." target="_blank" class="cta-wa-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Consultá por WhatsApp
+          </a>
+        </div>
       </div>
     </div>
 
   </section>
 
-  <!-- ── CATÁLOGO ── -->
+  <!-- ── CATÁLOGO POR CATEGORÍA ── -->
   <section id="pg-catalogo" class="pg">
     <div class="cat-layout">
-
-      <!-- SIDEBAR -->
       <aside id="sidebar">
         <h3 class="sidebar-ttl">Filtros</h3>
-
         <div class="fgroup">
           <span class="flabel">CATEGORÍA</span>
           <div id="sidebar-cats"></div>
         </div>
-
         <div class="fgroup">
           <span class="flabel">STOCK</span>
           <label class="fcheck"><input type="checkbox" id="f-disp" onchange="aplicarFiltros()"> ✅ Disponible</label>
           <label class="fcheck"><input type="checkbox" id="f-sin"  onchange="aplicarFiltros()"> ⛔ Sin stock</label>
         </div>
-
         <div class="fgroup">
           <span class="flabel">PRECIO</span>
           <label class="fcheck"><input type="checkbox" id="f-cuota" onchange="aplicarFiltros()"> 💳 Con cuotas</label>
         </div>
-
         <button class="clear-btn" onclick="limpiarFiltros()">↺ Limpiar filtros</button>
       </aside>
-
-      <!-- GRID CATÁLOGO -->
       <div class="cat-main">
         <div class="cat-topbar">
           <h2 id="cat-title" class="cat-ttl">Todos los productos</h2>
