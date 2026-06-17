@@ -219,13 +219,11 @@ function buildCatsHome(cats) {
   el.innerHTML = cats.map(([k, n], i) => {
     const c = catCfg(k);
     return `
-      <div class="cat-card-wrap" style="--d:${i * 70}ms">
-        <div class="cat-card" onclick="irCatalogoFiltrado('${k}')">
-          <div class="cat-emoji-wrap">${c.emoji}</div>
-          <div class="cat-card-name">${c.label}</div>
-          <div class="cat-card-count">${n} producto${n!==1?"s":""}</div>
-        </div>
-      </div>`;
+      <button class="home-cat-btn reveal-up" style="--d:${i * 60}ms" onclick="irCatalogoFiltrado('${k}')">
+        <span class="cat-emoji-sm">${c.emoji}</span>
+        <span class="cat-label-sm">${c.label}</span>
+        <span class="cat-cnt-sm">${n}</span>
+      </button>`;
   }).join("");
   setTimeout(observeReveal, 30);
 }

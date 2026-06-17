@@ -561,8 +561,74 @@ input { font-family:inherit }
 .s-overlay { display:none; position:fixed; inset:0; z-index:150; background:rgba(0,0,0,.45) }
 .s-overlay.show { display:block }
 
+/* ── HOME LAYOUT: sidebar cats + productos ── */
+.sec-explore { padding: 56px 0; background: var(--gris-bg) }
+
+.home-layout {
+  max-width: 1200px; margin: 0 auto; padding: 0 20px;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Sidebar de categorías */
+.home-sidebar { position: sticky; top: 74px }
+.home-sidebar-inner {
+  background: var(--blanco);
+  border: 1.5px solid var(--gris-border);
+  border-radius: var(--r);
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.home-sidebar-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 800;
+  color: var(--negro);
+  margin-bottom: 14px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--gris-border);
+}
+
+/* Botones de categoría en el sidebar */
+.home-cats-list { display: flex; flex-direction: column; gap: 2px }
+
+.home-cat-btn {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; text-align: left;
+  font-size: 13px; font-weight: 600; color: var(--gris);
+  background: none; border: none; cursor: pointer;
+  padding: 9px 10px; border-radius: 9px;
+  transition: all .18s;
+  border: 1.5px solid transparent;
+}
+.home-cat-btn:hover {
+  background: rgba(240,78,10,.05);
+  border-color: rgba(240,78,10,.2);
+  color: var(--nrj);
+}
+.home-cat-btn .cat-emoji-sm { font-size: 18px; flex-shrink: 0 }
+.home-cat-btn .cat-label-sm { flex: 1; line-height: 1.2 }
+.home-cat-btn .cat-cnt-sm {
+  font-size: 11px; font-weight: 700;
+  background: var(--gris-bg); color: var(--gris2);
+  padding: 2px 7px; border-radius: 50px;
+  flex-shrink: 0;
+}
+.home-cat-btn:hover .cat-cnt-sm {
+  background: rgba(240,78,10,.1); color: var(--nrj);
+}
+
+/* Columna derecha: productos */
+.home-products { min-width: 0 }
+.home-products .sec-head { margin-bottom: 20px }
+
 /* ── RESPONSIVE ── */
 @media(max-width:860px) {
+  .home-layout { grid-template-columns: 1fr }
+  .home-sidebar { position: static }
+  .home-cats-list { flex-direction: row; flex-wrap: wrap; gap: 8px }
+  .home-cat-btn { width: auto; padding: 7px 12px }
+  .home-cat-btn .cat-cnt-sm { display: none }
   .cat-layout { grid-template-columns:1fr }
   #sidebar {
     position:fixed; left:0; top:0; bottom:0; z-index:160;

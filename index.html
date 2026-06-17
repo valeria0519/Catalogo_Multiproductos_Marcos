@@ -37,8 +37,8 @@
     <div class="hero">
       <div class="hero-glow"></div>
       <div class="hero-body">
-        <span class="hero-pill">✦ LA ÚNICA TIENDA ONLINE QUE TE DA ESA FACILIDAD</span>
-        <h1>TODO lo que<br>necesitás,<br><em>EN 8 CUOTAS FIJAS SEMANALES</em></h1>
+        <span class="hero-pill reveal-up" style="--d:0ms">✦ 8 CUOTAS FIJAS SEMANALES · SIN INTERÉS</span>
+        <h1 class="reveal-up" style="--d:120ms">TODO lo que<br>necesitás,<br><em>a tu alcance</em></h1>
         <p class="reveal-up" style="--d:240ms">Celulares · Hogar · Perfumería · Electro · Sommier · Gamer</p>
         <div class="hero-btns reveal-up" style="--d:360ms">
           <button class="btn-grad" onclick="document.getElementById('sec-cats').scrollIntoView({behavior:'smooth'})">
@@ -56,30 +56,31 @@
       </div>
     </div>
 
-    <!-- CATEGORÍAS — PRIMERO Y PRINCIPAL -->
-    <div class="sec sec-cats" id="sec-cats">
-      <div class="sec-inner">
-        <div class="sec-head reveal-up">
-          <div>
-            <p class="sec-eyebrow">Navegá por sección</p>
-            <h2 class="sec-title">¿Qué estás buscando?</h2>
-          </div>
-        </div>
-        <div class="cats-grid" id="cats-home"></div>
-      </div>
-    </div>
+    <!-- CATEGORÍAS + PRODUCTOS: sidebar izquierda / grid derecha -->
+    <div class="sec sec-explore" id="sec-cats">
+      <div class="home-layout">
 
-    <!-- PRODUCTOS DESTACADOS -->
-    <div class="sec sec-dark">
-      <div class="sec-inner">
-        <div class="sec-head reveal-up">
-          <div>
-            <p class="sec-eyebrow">Selección especial</p>
-            <h2 class="sec-title">⭐ Destacados</h2>
+        <!-- SIDEBAR CATEGORÍAS -->
+        <aside class="home-sidebar reveal-up">
+          <div class="home-sidebar-inner">
+            <p class="sec-eyebrow">Navegá por sección</p>
+            <h2 class="home-sidebar-title">Categorías</h2>
+            <div class="home-cats-list" id="cats-home"></div>
           </div>
-          <button class="ver-todos-btn" onclick="navCatalogo()">Ver todos →</button>
+        </aside>
+
+        <!-- PRODUCTOS DESTACADOS -->
+        <div class="home-products">
+          <div class="sec-head reveal-up">
+            <div>
+              <p class="sec-eyebrow">Selección especial</p>
+              <h2 class="sec-title">⭐ Destacados</h2>
+            </div>
+            <button class="ver-todos-btn" onclick="navCatalogo()">Ver todos →</button>
+          </div>
+          <div class="grid" id="grid-destacados"></div>
         </div>
-        <div class="grid" id="grid-destacados"></div>
+
       </div>
     </div>
 
