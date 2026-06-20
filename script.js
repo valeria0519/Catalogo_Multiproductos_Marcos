@@ -220,7 +220,6 @@ function buildCatsHome(cats) {
     const c = catCfg(k);
     return `
       <button class="home-cat-btn reveal-up" style="--d:${i * 60}ms" onclick="irCatalogoFiltrado('${k}')">
-        <span class="cat-emoji-sm">${c.emoji}</span>
         <span class="cat-label-sm">${c.label}</span>
         <span class="cat-cnt-sm">${n}</span>
       </button>`;
@@ -233,12 +232,12 @@ function buildSidebarCats(cats) {
   if (!el) return;
   el.innerHTML = `
     <button class="fcat-btn active" data-cat="todos" onclick="setCategoria('todos',this)">
-      🔥 Todos <span class="fcat-cnt">${PRODS.length}</span>
+      Todos <span class="fcat-cnt">${PRODS.length}</span>
     </button>
     ${cats.map(([k,n]) => {
       const c = catCfg(k);
       return `<button class="fcat-btn" data-cat="${k}" onclick="setCategoria('${k}',this)">
-        ${c.emoji} ${c.label} <span class="fcat-cnt">${n}</span>
+        ${c.label} <span class="fcat-cnt">${n}</span>
       </button>`;
     }).join("")}`;
 }
