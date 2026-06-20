@@ -2,40 +2,53 @@ const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQaN4SzgBoast
 const WA_NUM    = "5491144751539";
 
 const CAT_MAP = {
-  "celular":           { emoji:"📱", label:"Celulares" },
-  "celulares":         { emoji:"📱", label:"Celulares" },
-  "telefonos":         { emoji:"📱", label:"Celulares" },
-  "teléfonos":         { emoji:"📱", label:"Celulares" },
-  "tv":                { emoji:"📺", label:"TV" },
-  "televisor":         { emoji:"📺", label:"TV" },
-  "televisores":       { emoji:"📺", label:"TV" },
-  "hogar":             { emoji:"🏠", label:"Hogar" },
-  "kit de ollas":      { emoji:"🍳", label:"Kit de Ollas" },
-  "electrodomestico":  { emoji:"🔌", label:"Electro" },
-  "electrodoméstico":  { emoji:"🔌", label:"Electro" },
-  "electrodomesticos": { emoji:"🔌", label:"Electro" },
-  "electrodomésticos": { emoji:"🔌", label:"Electro" },
-  "sommier":           { emoji:"🛏️", label:"Sommier" },
-  "colchon":           { emoji:"🛏️", label:"Sommier" },
-  "colchón":           { emoji:"🛏️", label:"Sommier" },
-  "perfume":           { emoji:"🌸", label:"Perfumería" },
-  "perfumes":          { emoji:"🌸", label:"Perfumería" },
-  "perfumeria":        { emoji:"🌸", label:"Perfumería" },
-  "perfumería":        { emoji:"🌸", label:"Perfumería" },
-  "silla":             { emoji:"🪑", label:"Sillas" },
-  "sillas":            { emoji:"🪑", label:"Sillas" },
-  "sillas gamer":      { emoji:"🎮", label:"Gamer" },
-  "gamer":             { emoji:"🎮", label:"Gamer" },
-  "bicicleta":         { emoji:"🚲", label:"Bicicletas" },
-  "heladera":          { emoji:"🧊", label:"Heladeras" },
-  "aire":              { emoji:"❄️",  label:"Aires" },
-  "herramienta":       { emoji:"🔧", label:"Herramientas" },
-  "herramientas":      { emoji:"🔧", label:"Herramientas" },
+  "celular":           { label:"Celulares" },
+  "celulares":         { label:"Celulares" },
+  "telefonos":         { label:"Celulares" },
+  "teléfonos":         { label:"Celulares" },
+  "tv":                { label:"Smart TV's" },
+  "televisor":         { label:"Smart TV's" },
+  "televisores":       { label:"Smart TV's" },
+  "smart tv":          { label:"Smart TV's" },
+  "smart tvs":         { label:"Smart TV's" },
+  "smart tv's":        { label:"Smart TV's" },
+  "smart's tv's":      { label:"Smart TV's" },
+  "smarts tvs":        { label:"Smart TV's" },
+  "hogar":             { label:"Hogar" },
+  "kit de ollas":      { label:"Kit de Ollas" },
+  "electrodomestico":  { label:"Electro" },
+  "electrodoméstico":  { label:"Electro" },
+  "electrodomesticos": { label:"Electro" },
+  "electrodomésticos": { label:"Electro" },
+  "electro":           { label:"Electro" },
+  "sommier":           { label:"Sommier" },
+  "colchon":           { label:"Sommier" },
+  "colchón":           { label:"Sommier" },
+  "perfume":           { label:"Perfumería" },
+  "perfumes":          { label:"Perfumería" },
+  "perfumeria":        { label:"Perfumería" },
+  "perfumería":        { label:"Perfumería" },
+  "silla":             { label:"Sillas" },
+  "sillas":            { label:"Sillas" },
+  "sillas gamer":      { label:"Gamer" },
+  "gamer":             { label:"Gamer" },
+  "bicicleta":         { label:"Bicicletas" },
+  "heladera":          { label:"Heladeras" },
+  "aire":              { label:"Aires" },
+  "herramienta":       { label:"Herramientas" },
+  "herramientas":      { label:"Herramientas" },
+  "notebook y tablet": { label:"Notebook y Tablet" },
+  "notebook":          { label:"Notebook y Tablet" },
+  "tablet":            { label:"Notebook y Tablet" },
+  "cocina multifuncion":  { label:"Cocina Multifunción" },
+  "cocina multifunción":  { label:"Cocina Multifunción" },
+  "termotanque electrico":  { label:"Termotanque Eléctrico" },
+  "termotanque eléctrico":  { label:"Termotanque Eléctrico" },
 };
 
 function catCfg(raw) {
   const k = (raw || "").toLowerCase().trim();
-  return CAT_MAP[k] || { emoji:"🛍️", label: raw || "Otros" };
+  return CAT_MAP[k] || { label: raw || "Otros" };
 }
 
 const WA_PATH = `<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>`;
@@ -135,13 +148,13 @@ function cardHTML(p, delay = 0) {
   const contado = fmt(p.precio_contado);
 
   const tags = [];
-  if (esDestad) tags.push(`<span class="tag tag-dest">⭐ Destacado</span>`);
+  if (esDestad) tags.push(`<span class="tag tag-dest">Destacado</span>`);
   if (p.etiqueta) tags.push(`<span class="tag tag-custom">${p.etiqueta}</span>`);
   if (!dispon)    tags.push(`<span class="tag tag-sin">Sin stock</span>`);
 
   const imgInner = p.imagen && p.imagen.startsWith("http")
     ? `<img src="${p.imagen}" alt="${p.producto}" loading="lazy" onerror="this.style.display='none'">`
-    : cfg.emoji;
+    : `<span style="font-size:48px;opacity:.3">📦</span>`;
 
   let precioHTML;
   if (cuota) {
@@ -165,7 +178,7 @@ function cardHTML(p, delay = 0) {
         ${tags.length ? `<div class="card-tags">${tags.join("")}</div>` : ""}
       </div>
       <div class="card-body">
-        <p class="card-cat">${cfg.emoji} ${cfg.label}</p>
+        <p class="card-cat">${cfg.label}</p>
         <p class="card-nombre">${p.producto}</p>
         ${p.descripcion ? `<p class="card-desc">${p.descripcion}</p>` : ""}
         <div class="card-price-block">${precioHTML}</div>
@@ -295,7 +308,7 @@ function verDetalle(id) {
 
   const imgInner = p.imagen && p.imagen.startsWith("http")
     ? `<img src="${p.imagen}" alt="${p.producto}">`
-    : `<span style="font-size:90px">${cfg.emoji}</span>`;
+    : `<span style="font-size:90px;opacity:.25">📦</span>`;
 
   let precioHTML;
   if (cuota) {
@@ -311,15 +324,15 @@ function verDetalle(id) {
   }
 
   const chips = [];
-  if (p.cuotas) chips.push(`💳 ${p.cuotas} cuotas semanales`);
-  if (p.etiqueta) chips.push(`🏷️ ${p.etiqueta}`);
-  chips.push(dispon ? "✅ En stock" : "⛔ Sin stock");
+  if (p.cuotas) chips.push(`${p.cuotas} cuotas`);
+  if (p.etiqueta) chips.push(p.etiqueta);
+  chips.push(dispon ? "En stock" : "Sin stock");
 
   document.getElementById("det-body").innerHTML = `
     <div class="det-grid">
       <div class="det-img">${imgInner}</div>
       <div>
-        <p class="det-cat">${cfg.emoji} ${cfg.label}</p>
+        <p class="det-cat">${cfg.label}</p>
         <h1 class="det-nombre">${p.producto}</h1>
         ${p.descripcion ? `<p class="det-desc">${p.descripcion}</p>` : ""}
         <hr class="det-divider">
@@ -328,7 +341,7 @@ function verDetalle(id) {
           ${chips.map(c => `<span class="det-meta-chip">${c}</span>`).join("")}
         </div>
         <div class="det-stock ${dispon?"ok":"no"}">
-          ${dispon ? "✅ Disponible" : "⛔ Sin stock"}
+          ${dispon ? "Disponible" : "Sin stock"}
         </div>
         <a href="${waUrl(p)}" class="det-wa-btn" target="_blank">
           ${WA_SVG} Consultar por WhatsApp
